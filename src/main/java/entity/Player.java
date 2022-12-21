@@ -42,19 +42,19 @@ public class Player extends Entity{
         }
     }
     public void update() {
-        if (keyH.upPressed == true) {
+        if (keyH.upPressed) {
             direction = "up";
             y -= speed;
         }
-        else if (keyH.downPressed == true) {
+        else if (keyH.downPressed) {
             direction = "down";
             y += speed;
         }
-        else if (keyH.leftPressed == true) {
+        else if (keyH.leftPressed) {
             direction = "left";
             x -= speed;
         }
-        else if (keyH.rightPressed == true) {
+        else if (keyH.rightPressed) {
             direction = "right";
             x += speed;
         }
