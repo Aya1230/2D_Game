@@ -1,14 +1,14 @@
 package main;
 
-import entity.Player;
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel  implements Runnable {
+public class GamePanel extends JPanel implements Runnable {
 
     // SCREEN SETTINGS
     private int originalTileSize = 32; // 16x16 tile
     private int scale = 2;
+
 
     public int tileSize = originalTileSize * scale;
     private int maxScreenCol = 16;
@@ -22,6 +22,7 @@ public class GamePanel extends JPanel  implements Runnable {
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this,keyH);
+    Room room = new Room();
 
     // Set player's default position
     int playerX = 100;
@@ -32,11 +33,19 @@ public class GamePanel extends JPanel  implements Runnable {
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenwidth, screenHeight));
-        this.setBackground(Color.black);
+
+        this.setLayout(new BoxLayout(this,1));
+        ImageIcon icon = new ImageIcon("tiles/dungeon_room.jpg");
+        JLabel background = new JLabel("BLA");
+
+        this.add(background);
+
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
+
+
 
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -82,6 +91,8 @@ public class GamePanel extends JPanel  implements Runnable {
             super.paintComponent(g);
 
             Graphics2D g2 = (Graphics2D) g;
+            room.draw(g2);
+
             player.draw(g2);
             g2.dispose();
 
