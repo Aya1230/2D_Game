@@ -8,8 +8,6 @@ public class GamePanel extends JPanel implements Runnable {
     // SCREEN SETTINGS
     private int originalTileSize = 32; // 16x16 tile
     private int scale = 2;
-
-
     public int tileSize = originalTileSize * scale;
     private int maxScreenCol = 16;
     private int maxScreenRow = 12;
@@ -33,13 +31,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenwidth, screenHeight));
-
-        this.setLayout(new BoxLayout(this,1));
-        ImageIcon icon = new ImageIcon("tiles/dungeon_room.jpg");
-        JLabel background = new JLabel("BLA");
-
-        this.add(background);
-
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
