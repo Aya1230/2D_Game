@@ -6,19 +6,13 @@ import java.io.IOException;
 
 public class Room {
 
-
-    private String roomPathIMG;
-
-    public Room(String roomPathIMG) {
-        this.roomPathIMG = roomPathIMG;
-    }
-
-    public Room(){
+    public Room() {
 
     }
 
     public void draw(Graphics g2)  {
         Image door = null;
+
         try {
             door = ImageIO.read(getClass().getResourceAsStream("/tiles/dungeon_room.jpg"));
         } catch (IOException e) {

@@ -28,6 +28,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = true;
         }
+        if (code == KeyEvent.VK_E) {
+            System.out.println("Interact with Object/Person. Get an Object");
+        }
     }
 
     @Override
