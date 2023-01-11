@@ -16,7 +16,6 @@ public class GamePanel extends JPanel implements Runnable {
 
     // FPS
     private int FPS = 60;
-
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this,keyH);
@@ -27,6 +26,9 @@ public class GamePanel extends JPanel implements Runnable {
     int playerY = 100;
     int playerSpeed = 4;
 
+    // Distance from border at which we consider the player to be "near" the border
+    int borderDistance = 50;
+
 
 
     public GamePanel() {
@@ -35,8 +37,6 @@ public class GamePanel extends JPanel implements Runnable {
         this.addKeyListener(keyH);
         this.setFocusable(true);
     }
-
-
 
     public void startGameThread() {
         gameThread = new Thread(this);
@@ -67,14 +67,11 @@ public class GamePanel extends JPanel implements Runnable {
                 drawCount++;
             }
 
-            if (timer >= 1000000000) {
-                System.out.println("FPS:" + drawCount);
-                drawCount = 0;
-                timer = 0;
-            }
-
         }
+
     }
+
+
     public void update() {
        player.update();
     }
@@ -82,9 +79,10 @@ public class GamePanel extends JPanel implements Runnable {
             super.paintComponent(g);
 
             Graphics2D g2 = (Graphics2D) g;
-            room.draw(g2);
 
+            room.draw(g2);
             player.draw(g2);
+
             g2.dispose();
 
         }
