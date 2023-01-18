@@ -1,5 +1,9 @@
 package main;
 
+import Tiels.Tile;
+import Tiels.TileManager;
+import main.Entity.Player;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,23 +12,20 @@ public class GamePanel extends JPanel implements Runnable {
     // SCREEN SETTINGS
     private int originalTileSize = 32; // 16x16 tile
     private int scale = 2;
-    public int tileSize = originalTileSize * scale;
-    private int maxScreenCol = 16;
-    private int maxScreenRow = 12;
-    private int screenwidth = tileSize * maxScreenCol;
-    private int screenHeight = tileSize * maxScreenRow;
+    public final int tileSize = originalTileSize * scale;
+    public final int maxScreenCol = 16;
+    public final int maxScreenRow = 12;
+   public final int screenwidth = tileSize * maxScreenCol;
+    public final int screenHeight = tileSize * maxScreenRow;
 
     // FPS
     private int FPS = 60;
+
+    TileManager tilem = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread;
     Player player = new Player(this,keyH);
-    Room room = new Room();
 
-    // Set player's default position
-    int playerX = 100;
-    int playerY = 100;
-    int playerSpeed = 4;
 
     // Distance from border at which we consider the player to be "near" the border
     int borderDistance = 50;
@@ -80,7 +81,7 @@ public class GamePanel extends JPanel implements Runnable {
 
             Graphics2D g2 = (Graphics2D) g;
 
-            room.draw(g2);
+            tilem.draw(g2);
             player.draw(g2);
 
             g2.dispose();
