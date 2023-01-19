@@ -26,7 +26,7 @@ public class GameManager extends JPanel implements Runnable {
     TileManager tilem = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
     Thread gameThread = new Thread(this);
-    public Player player = new Player(this,keyH,, player.screenX);
+    Player player = new Player(this,keyH);
 
 
     // Distance from border at which we consider the player to be "near" the border
