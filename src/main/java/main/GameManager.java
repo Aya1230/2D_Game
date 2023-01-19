@@ -1,46 +1,45 @@
 package main;
 
-import Tiels.Tile;
-import Tiels.TileManager;
-import main.Entity.Player;
-
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel implements Runnable {
+public class GameManager extends JPanel implements Runnable {
 
-    // SCREEN SETTINGS
-    private int originalTileSize = 32; // 16x16 tile
-    private int scale = 2;
-    public final int tileSize = originalTileSize * scale;
+
+    // Screen-Settings
+    private int originalTileSize = 16;
+    private int scale = 4;
+    public int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 16;
     public final int maxScreenRow = 12;
-   public final int screenwidth = tileSize * maxScreenCol;
+    public final int screenwidth = tileSize * maxScreenCol;
     public final int screenHeight = tileSize * maxScreenRow;
+
+    // World Settings
+    public final int maxWorldCol = 50;
+    public final int maxWorldRow = 50;
 
     // FPS
     private int FPS = 60;
 
+    // Objects
     TileManager tilem = new TileManager(this);
     KeyHandler keyH = new KeyHandler();
-    Thread gameThread;
-    Player player = new Player(this,keyH);
+    Thread gameThread = new Thread(this);
+    public Player player = new Player(this,keyH,, player.screenX);
 
 
     // Distance from border at which we consider the player to be "near" the border
-    int borderDistance = 50;
+    int borderDistance = 25;
 
 
 
-    public GamePanel() {
+    public GameManager() {
         this.setPreferredSize(new Dimension(screenwidth, screenHeight));
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
-    }
 
-    public void startGameThread() {
-        gameThread = new Thread(this);
         gameThread.start();
     }
 
@@ -62,7 +61,7 @@ public class GamePanel extends JPanel implements Runnable {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                update();
+                player.update();
                 repaint();
                 delta--;
                 drawCount++;
@@ -72,20 +71,16 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+    public void paintComponent (Graphics g) {
+        super.paintComponent(g);
 
-    public void update() {
-       player.update();
-    }
-        public void paintComponent (Graphics g){
-            super.paintComponent(g);
+        Graphics2D gD2 = (Graphics2D) g;
 
-            Graphics2D g2 = (Graphics2D) g;
+        tilem.draw(gD2);
+        player.draw(gD2);
 
-            tilem.draw(g2);
-            player.draw(g2);
-
-            g2.dispose();
-
-        }
+        gD2.dispose();
 
     }
+
+}

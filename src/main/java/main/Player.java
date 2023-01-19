@@ -1,30 +1,35 @@
-package main.Entity;
-
-import main.GamePanel;
-import main.KeyHandler;
+package main;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class Player extends Entity{
-    GamePanel gp;
+public class Player extends Entity {
+    GameManager gm;
     KeyHandler keyH;
 
+    public int screenY;
+    public int screenX;
 
-    public Player(GamePanel gp,KeyHandler keyH) {
-        this.gp = gp;
+    public Player(GameManager gp, KeyHandler keyH, int screenY, int screenX) {
+        this.gm = gp;
         this.keyH = keyH;
+        this.screenY = screenY;
+        this.screenX = screenX;
 
         setDefaultValues();
         getPlayerImage();
     }
     public void setDefaultValues() {
 
-        x = 100;
-        y = 100;
-        speed = 4;
+        worldX = gm.tileSize * 23;
+        worldY = gm.tileSize * 21;
+
+        screenX = gm.screenwidth/2 - (gm.tileSize/2);
+        screenY = gm.screenHeight/2 - (gm.tileSize/2);
+
+        speed = 6;
         direction = "down";
     }
     public void getPlayerImage() {
@@ -45,24 +50,24 @@ public class Player extends Entity{
     }
     public void update() {
 
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed)
-        {
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
             if (keyH.upPressed) {
                 direction = "up";
-                y -= speed;
+                worldY -= speed;
             }
             else if (keyH.downPressed) {
                 direction = "down";
-                y += speed;
+                worldY += speed;
             }
             else if (keyH.leftPressed) {
                 direction = "left";
-                x -= speed;
+                worldX -= speed;
             }
             else {
                 direction = "right";
-                x += speed;
+                worldX += speed;
             }
+
             spriteCounter++;
             if(spriteCounter > 13) {
                 if (spriteNum == 1) {
@@ -72,9 +77,10 @@ public class Player extends Entity{
                     spriteNum = 1;
                 }
                 spriteCounter = 0;
-        }
+            }
 
         }
+
     }
 
 
@@ -116,9 +122,7 @@ public class Player extends Entity{
                 }
             }
         }
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
-
-
+        g2.drawImage(image, screenX, screenY, gm.tileSize, gm.tileSize, null);
 
     }
 }
