@@ -1,4 +1,4 @@
-package Tiels;
+package main;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

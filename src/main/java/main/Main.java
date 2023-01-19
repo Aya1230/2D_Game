@@ -9,14 +9,14 @@ public class Main {
      */
     public static void main (String[] args){
         JFrame window = new JFrame();
-        GamePanel gamePanel = new GamePanel();
+        GameManager gamePanel = new GameManager();
 
         // Set the Window title
         window.setTitle("The Quest for the Lost City");
         //Initialise Game-Components
         window.add(gamePanel);
         window.pack();
-        gamePanel.startGameThread();
+
 
         //Setablels
         window.setLocationRelativeTo(null);
