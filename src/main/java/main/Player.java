@@ -12,7 +12,7 @@ public class Player extends Entity {
     public int screenY;
     public int screenX;
 
-    public Player(GameManager gp, KeyHandler keyH, int screenY, int screenX) {
+    public Player(GameManager gp, KeyHandler keyH) {
         this.gm = gp;
         this.keyH = keyH;
         this.screenY = screenY;
@@ -21,6 +21,7 @@ public class Player extends Entity {
         setDefaultValues();
         getPlayerImage();
     }
+
     public void setDefaultValues() {
 
         worldX = gm.tileSize * 23;
