@@ -23,16 +23,10 @@ public class GameManager extends JPanel implements Runnable {
     private int FPS = 60;
 
     // Objects
-    TileManager tilem = new TileManager(this);
-    KeyHandler keyH = new KeyHandler();
-    Thread gameThread = new Thread(this);
-    Player player = new Player(this,keyH);
-
-
-    // Distance from border at which we consider the player to be "near" the border
-    int borderDistance = 25;
-
-
+    private TileManager tile = new TileManager(this);
+    private KeyHandler keyH = new KeyHandler();
+    private Thread gameThread = new Thread(this);
+    public Player player = new Player(this,keyH);
 
     public GameManager() {
         this.setPreferredSize(new Dimension(screenwidth, screenHeight));
@@ -45,7 +39,7 @@ public class GameManager extends JPanel implements Runnable {
 
     @Override
     public void run() {
-        double drawInterval = 1000000000/FPS;//0.01666 seconds
+        double drawInterval = 1000000000 / FPS;
         double delta = 0;
         long lastTime = System.nanoTime();
         long currentTime;
@@ -53,30 +47,31 @@ public class GameManager extends JPanel implements Runnable {
         int drawCount = 0;
 
         while (gameThread != null) {
-
             currentTime = System.nanoTime();
-
             delta += (currentTime - lastTime) / drawInterval;
             timer += (currentTime - lastTime);
             lastTime = currentTime;
 
-            if (delta >= 1) {
+            while (delta >= 1) {
                 player.update();
                 repaint();
                 delta--;
                 drawCount++;
             }
-
         }
-
     }
 
+
+    /**
+     * Paint-Methode. Führt ein ".draw()" aus falls sich änderungen ereignen.
+     * @param g the <code>Graphics</code> object to protect
+     */
     public void paintComponent (Graphics g) {
         super.paintComponent(g);
 
         Graphics2D gD2 = (Graphics2D) g;
 
-        tilem.draw(gD2);
+        tile.draw(gD2);
         player.draw(gD2);
 
         gD2.dispose();

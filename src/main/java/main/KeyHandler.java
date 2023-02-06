@@ -7,11 +7,10 @@ import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
 
-    public boolean upPressed, downPressed, leftPressed, rightPressed;
-    @Override
-    public void keyTyped(KeyEvent e) {
+    public boolean upPressed, downPressed, leftPressed, rightPressed, ePressed;
 
-    }
+    @Override
+    public void keyTyped(KeyEvent e) {}
 
     @Override
     public void keyPressed(@NotNull KeyEvent e) {
@@ -29,7 +28,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
         if (code == KeyEvent.VK_E) {
-            System.out.println("Interact with Object/Person. Get an Object");
+            System.out.println("E Pressed");
         }
     }
 
@@ -49,5 +48,9 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_D) {
             rightPressed = false;
         }
+        if (code == KeyEvent.VK_E) {
+            ePressed = false;
+        }
+
     }
 }

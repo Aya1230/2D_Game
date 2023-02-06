@@ -4,10 +4,11 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity {
-    GameManager gm;
-    KeyHandler keyH;
+    private GameManager gm;
+    private KeyHandler keyH;
 
     public int screenY;
     public int screenX;
@@ -15,15 +16,12 @@ public class Player extends Entity {
     public Player(GameManager gp, KeyHandler keyH) {
         this.gm = gp;
         this.keyH = keyH;
-        this.screenY = screenY;
-        this.screenX = screenX;
 
         setDefaultValues();
         getPlayerImage();
     }
 
     public void setDefaultValues() {
-
         worldX = gm.tileSize * 23;
         worldY = gm.tileSize * 21;
 
@@ -33,20 +31,21 @@ public class Player extends Entity {
         speed = 6;
         direction = "down";
     }
+
     public void getPlayerImage() {
 
         try {
-            up1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_1.png"));
-            up2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_up_2.png"));
-            down1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_1.png"));
-            down2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_down_2.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_left_2.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/boy_right_2.png"));
+            up1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_up_1.png")));
+            up2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_up_2.png")));
+            down1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_down_1.png")));
+            down2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_down_2.png")));
+            left1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_left_1.png")));
+            left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_left_2.png")));
+            right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_right_1.png")));
+            right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_right_2.png")));
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Fehler beim Laden der 'Spieler-Assets'");
         }
     }
     public void update() {
@@ -70,13 +69,9 @@ public class Player extends Entity {
             }
 
             spriteCounter++;
-            if(spriteCounter > 13) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                }
-                else if(spriteNum == 2) {
-                    spriteNum = 1;
-                }
+            spriteCounter++;
+            if (spriteCounter > 13) {
+                spriteNum = spriteNum == 1 ? 2 : 1;
                 spriteCounter = 0;
             }
 

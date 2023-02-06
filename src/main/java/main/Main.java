@@ -8,13 +8,15 @@ public class Main {
      * @param args
      */
     public static void main (String[] args){
+        // Erstellen der Fenster/Game Objekte
         JFrame window = new JFrame();
         GameManager gamePanel = new GameManager();
 
-        // Set the Window title
+        // Setzt den Titel des Fensters
         window.setTitle("The Quest for the Lost City");
-        //Initialise Game-Components
+        // Füge das Spiel-Panel dem Fenster hinzu
         window.add(gamePanel);
+        // Passe die Größe des Fensters an die Größe des Panels an
         window.pack();
 
 
@@ -23,7 +25,5 @@ public class Main {
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
-
-
     }
 }
