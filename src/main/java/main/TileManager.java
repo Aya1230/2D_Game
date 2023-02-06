@@ -9,18 +9,18 @@ import java.io.InputStreamReader;
 
 public class TileManager {
     private GameManager gm;
-    private Tile[] tile;
-    private int mapTileNum[][];
+    public Tile[] tile;
+    public int mapTileNum[][];
 
     /**
-     * Kunstruktor
+     * Constructor
      * @param gm
      */
     public TileManager(GameManager gm) {
         this.gm = gm;
 
         tile = new Tile[10];
-        mapTileNum = new int[gm.maxScreenCol][gm.maxScreenRow];
+        mapTileNum = new int[gm.GAME_WIDTH][gm.GAME_HEIGHT];
 
         getTileImage();
         loadMap();
@@ -34,6 +34,7 @@ public class TileManager {
         try {
             tile[0] = new Tile();
             tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Floor1.png"));
+            tile[0].collision = true;
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Floor2.png"));
@@ -78,7 +79,7 @@ public class TileManager {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Fehler beim Lesen der Map");
+            System.err.println("Fehler beim einlesen der Map");
         }
 
 

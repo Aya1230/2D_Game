@@ -1,6 +1,7 @@
 package main;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
     /**
@@ -8,7 +9,7 @@ public class Main {
      * @param args
      */
     public static void main (String[] args){
-        // Erstellen der Fenster/Game Objekte
+        // Erstellen der Fenster/Game Objekt
         JFrame window = new JFrame();
         GameManager gamePanel = new GameManager();
 
@@ -22,6 +23,7 @@ public class Main {
 
         //Setablels
         window.setLocationRelativeTo(null);
+        window.setBackground(Color.BLACK);
         window.setVisible(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
