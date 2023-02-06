@@ -1,7 +1,6 @@
 package main;
 
 import org.jetbrains.annotations.NotNull;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -28,7 +27,7 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
         if (code == KeyEvent.VK_E) {
-            System.out.println("E Pressed");
+            ePressed = true;
         }
     }
 

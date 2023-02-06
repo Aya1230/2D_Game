@@ -9,9 +9,12 @@ import java.util.Objects;
 public class Player extends Entity {
     private GameManager gm;
     private KeyHandler keyH;
+    private MouseHandler mH;
 
     public int screenY;
     public int screenX;
+    
+    
 
     public Player(GameManager gp, KeyHandler keyH) {
         this.gm = gp;
@@ -43,29 +46,34 @@ public class Player extends Entity {
             left2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_left_2.png")));
             right1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_right_1.png")));
             right2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/boy_right_2.png")));
-
+            attack1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/attack/attack_1.png")));
+            attack2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/attack/attack_2.png")));
+            attack3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/attack/attack_3.png")));
         } catch (IOException e) {
             System.err.println("Fehler beim Laden der 'Spieler-Assets'");
         }
     }
     public void update() {
 
-        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+        if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed || mH.mPressed || mH.mReleased) {
             if (keyH.upPressed) {
-                direction = "up";
+                action = "up";
                 worldY -= speed;
             }
             else if (keyH.downPressed) {
-                direction = "down";
+                action = "down";
                 worldY += speed;
             }
             else if (keyH.leftPressed) {
-                direction = "left";
+                action = "left";
                 worldX -= speed;
             }
-            else {
-                direction = "right";
+            else if (keyH.rightPressed) {
+                action = "right";
                 worldX += speed;
+            }
+            else if (mH.mPressed) {
+                action = "attack";
             }
 
             spriteCounter++;
@@ -115,6 +123,17 @@ public class Player extends Entity {
                 }
                 if (spriteNum == 2) {
                     image = right2;
+                }
+            }
+            case "attack" -> {
+                if (spriteNum == 1) {
+                    image = attack1;
+                }
+                if (spriteNum == 2) {
+                    image = attack2;
+                }
+                if (spriteNum == 3) {
+                    image = attack3;
                 }
             }
         }
