@@ -33,12 +33,9 @@ public class TileManager {
 
         try {
             tile[0] = new Tile();
-<<<<<<< HEAD
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Black.png"));
-=======
-            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Floor1.png"));
+            tile[0].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Room1_Floor.png"));
             tile[0].collision = true;
->>>>>>> d0115c16465f952bedb61f916ba790b1f89f3a7c
+
 
             tile[1] = new Tile();
             tile[1].image = ImageIO.read(getClass().getResourceAsStream("/tiles/Room1_Floor.png"));
